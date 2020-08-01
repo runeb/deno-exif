@@ -1,0 +1,24 @@
+import { entries } from "<%= entries_path %>";
+import { assert, assertEquals } from "https://deno.land/std@0.63.0/testing/asserts.ts";
+
+<% for testfile in paths %>
+Deno.test('<%= testfile[:file] %>', async () => {
+  const path = 'test/<%= testfile[:file] %>'
+  const result = await entries(path);
+  let entry
+
+  <% for entry in testfile[:entries] %>
+  entry = result.find(r => r.tag === <%= entry[:code] %>)
+  assert(entry, "Missing tag <%= entry[:code]%>")
+  assertEquals(entry.type, <%= entry[:type]%>)
+  assertEquals(entry.count, <%= entry[:count]%>)
+  assertEquals(entry.size, <%= entry[:size]%>)
+
+  <% if entry[:type].is_a?(String) %>
+  assertEquals(entry.value, "<%= entry[:value]%>")
+  <% else %>
+  assertEquals(entry.value, <%= entry[:value]%>)
+  <% end %>
+  <% end %>
+});
+<% end  %>
