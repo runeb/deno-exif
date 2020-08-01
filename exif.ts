@@ -24,9 +24,21 @@ enum IFDType {
   SRATIONAL = 10,
 }
 
+// https://www.exiv2.org/tags.html
 enum Tag {
   X_RESOLUTION = 0x011a,
   Y_RESOLUTION = 0x011b,
+  EXIF_IFD_POINTER = 0x8769,
+  JPEG_INTERCHANGE_FORMAT = 0x0201,
+  /* 
+   * The number of bytes of JPEG compressed thumbnail data. This is not used for
+   * primary image JPEG data. JPEG thumbnails are not divided but are recorded
+   * as a continuous JPEG bitstream from SOI to EOI. Appn and COM markers should
+   * not be recorded. Compressed thumbnails must be recorded in no more than 64
+   * Kbytes, including all other data to be recorded in APP1. */
+  JPEG_INTERCHANGE_FORMAT_LENGTH = 0x0202,
+  GPS_INFO_IFD_POINTER = 0x8825,
+  INTEROPERABILITY_IFD_POINTER = 0xa005,
 }
 
 const IFD_SIZE = 12;
@@ -117,7 +129,6 @@ export async function entries(
   path: string,
 ): Promise<ExifEntry[]> {
   const file = await Deno.open(path);
-  const buffer = new Uint8Array(2);
 
   async function readAscii(length: number) {
     // Subtract 1 because the length is \0 terminator included.
@@ -126,13 +137,26 @@ export async function entries(
     return new TextDecoder().decode(strBuf);
   }
 
-  async function readUint16(littleEndian = false): Promise<number> {
+  const uint16Buf = new Uint8Array(2);
+  async function readUint16(
+    offset: number = 0,
+    littleEndian = false,
+    rewind: boolean = false,
+  ): Promise<number> {
     let buf: number = 0;
-    await Deno.read(file.rid, buffer);
+    let curr = 0;
+    if (rewind) {
+      curr = await file.seek(0, Deno.SeekMode.Current);
+    }
+    await file.seek(offset, Deno.SeekMode.Current);
+    await Deno.read(file.rid, uint16Buf);
     if (littleEndian) {
-      buf = (buffer[1] << 8) + buffer[0];
+      buf = (uint16Buf[1] << 8) + uint16Buf[0];
     } else {
-      buf = (buffer[0] << 8) + buffer[1];
+      buf = (uint16Buf[0] << 8) + uint16Buf[1];
+    }
+    if (rewind) {
+      await file.seek(curr, Deno.SeekMode.Start);
     }
     return buf;
   }
@@ -142,36 +166,43 @@ export async function entries(
     console.error("Not a JPEG");
     return [];
   }
+
   // Seek to APP1
   while (0xFFe1 !== await readUint16()) {}
-  const app1len = await readUint16(false);
-  let curr = file.seekSync(0, Deno.SeekMode.Current);
-  const tiffHeader = file.seekSync(6, Deno.SeekMode.Current);
-
-  // TIFF header
+  await file.seek(8, Deno.SeekMode.Current);
+  const offsetStart = await file.seek(0, Deno.SeekMode.Current);
   let byteOrder = await readUint16();
   let littleEndian = byteOrder === 0x4949;
-  file.seekSync(6, Deno.SeekMode.Current);
-  let count = await readUint16(littleEndian);
+  await file.seek(6, Deno.SeekMode.Current);
+  let curr = file.seekSync(0, Deno.SeekMode.Current);
+  let count = await readUint16(0, littleEndian);
 
   const result: ExifEntry[] = [];
   const ifds = new Uint8Array(IFD_SIZE * count);
-  curr = file.seekSync(0, Deno.SeekMode.Current);
   await Deno.read(file.rid, ifds);
   for (let i = 0; i < count; i++) {
-    console.log("current offset: ", curr + i * IFD_SIZE);
     const view = new DataView(ifds.buffer, i * IFD_SIZE);
     const tag = view.getUint16(0, littleEndian);
     const type = view.getUint16(2, littleEndian);
     const count = view.getUint32(4, littleEndian);
-    const offset = view.getUint32(8, littleEndian);
+    const offsetOrValue = view.getUint32(8, littleEndian);
+
+    switch (tag) {
+      case Tag.EXIF_IFD_POINTER:
+      case Tag.JPEG_INTERCHANGE_FORMAT:
+      case Tag.JPEG_INTERCHANGE_FORMAT_LENGTH:
+      case Tag.GPS_INFO_IFD_POINTER:
+      case Tag.INTEROPERABILITY_IFD_POINTER:
+        continue;
+    }
+
     const res: ExifEntry = {
       tag,
       type,
       count,
-      offset: offset + tiffHeader,
+      offset: offsetOrValue + offsetStart,
       size: valueSize(count, type),
-      value: -1,
+      value: offsetOrValue,
     };
 
     switch (res.type) {
@@ -182,9 +213,6 @@ export async function entries(
       case IFDType.BYTE:
       case IFDType.SHORT:
         res.value = view.getUint16(8, littleEndian);
-        break;
-      case IFDType.LONG:
-        res.value = offset;
         break;
       case IFDType.RATIONAL:
         if (res.tag === Tag.Y_RESOLUTION) {
