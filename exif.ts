@@ -52,29 +52,6 @@ export type ExifEntry = {
   value: string | number;
 };
 
-async function readIFD() {
-  // 0-1 TAG
-  // 2-3 TYPE
-  /*
-  */
-  // 4-7 COUNT
-  /*
-  The number of values. It should be noted carefully that the count is not
-  the sum of the bytes. In the case of one value of SHORT (16 bits), for
-  example, the count is '1' even though it is 2 Bytes.
-  */
-  // 8-11 VALUE OFFSET
-  /*
-  This tag records the offset from the start of the TIFF header to the
-  position where the value itself is recorded. In cases where the value fits
-  in 4 Bytes, the value itself is recorded. If the value is smaller than 4
-  Bytes, the value is stored in the 4-Byte area starting from the left, i.e.,
-  from the lower end of the byte offset area. For example, in big endian
-  format, if the type is SHORT and the value is 1, it is recorded as
-  00010000.H.
-  */
-}
-
 function valueSize(count: number, type: IFDType): number {
   switch (type) {
     case IFDType.BYTE:
@@ -125,90 +102,95 @@ function text(tag: number, value: number): string | number {
   }
 }
 
-export async function entries(
-  path: string,
-): Promise<ExifEntry[]> {
-  const file = await Deno.open(path);
+async function readAscii(file: Deno.File, fileOffset: number, length: number) {
+  // Subtract 1 because the length is \0 terminator included.
+  await file.seek(fileOffset, Deno.SeekMode.Start);
+  const strBuf = new Uint8Array(length - 1);
+  await Deno.read(file.rid, strBuf);
+  return new TextDecoder().decode(strBuf);
+}
 
-  async function readAscii(length: number) {
-    // Subtract 1 because the length is \0 terminator included.
-    const strBuf = new Uint8Array(length - 1);
-    await Deno.read(file.rid, strBuf);
-    return new TextDecoder().decode(strBuf);
-  }
-
+async function readUint16(
+  file: Deno.File,
+  offset: number = 0,
+  littleEndian = false,
+): Promise<number> {
   const uint16Buf = new Uint8Array(2);
-  async function readUint16(
-    offset: number = 0,
-    littleEndian = false,
-    rewind: boolean = false,
-  ): Promise<number> {
-    let buf: number = 0;
-    let curr = 0;
-    if (rewind) {
-      curr = await file.seek(0, Deno.SeekMode.Current);
-    }
+  let buf: number = 0;
+  if (offset) {
     await file.seek(offset, Deno.SeekMode.Current);
-    await Deno.read(file.rid, uint16Buf);
-    if (littleEndian) {
-      buf = (uint16Buf[1] << 8) + uint16Buf[0];
-    } else {
-      buf = (uint16Buf[0] << 8) + uint16Buf[1];
-    }
-    if (rewind) {
-      await file.seek(curr, Deno.SeekMode.Start);
-    }
-    return buf;
   }
-
-  // JPEG?
-  if (0xFFD8 !== await readUint16()) {
-    console.error("Not a JPEG");
-    return [];
+  await Deno.read(file.rid, uint16Buf);
+  if (littleEndian) {
+    buf = (uint16Buf[1] << 8) + uint16Buf[0];
+  } else {
+    buf = (uint16Buf[0] << 8) + uint16Buf[1];
   }
+  return buf;
+}
 
-  // Seek to APP1
-  while (0xFFe1 !== await readUint16()) {}
-  await file.seek(8, Deno.SeekMode.Current);
-  const offsetStart = await file.seek(0, Deno.SeekMode.Current);
-  let byteOrder = await readUint16();
-  let littleEndian = byteOrder === 0x4949;
+async function readApp1(
+  file: Deno.File,
+  fileOffset: number,
+  headerOffset: number,
+  littleEndian: boolean,
+) {
+  await file.seek(fileOffset, Deno.SeekMode.Start);
+  const size = await readUint16(file, 0, littleEndian);
+  // Skip EXIF header
   await file.seek(6, Deno.SeekMode.Current);
-  let curr = file.seekSync(0, Deno.SeekMode.Current);
-  let count = await readUint16(0, littleEndian);
+}
 
-  const result: ExifEntry[] = [];
+async function readIfd(
+  file: Deno.File,
+  fileOffset: number,
+  headerOffset: number,
+  littleEndian: boolean,
+) {
+  await file.seek(fileOffset, Deno.SeekMode.Start);
+  const count = await readUint16(file, 0, littleEndian);
+  let result: ExifEntry[] = [];
   const ifds = new Uint8Array(IFD_SIZE * count);
   await Deno.read(file.rid, ifds);
+  console.log("Current loc", await file.seek(0, Deno.SeekMode.Current));
   for (let i = 0; i < count; i++) {
+    const tagOffset = fileOffset + (IFD_SIZE * i);
     const view = new DataView(ifds.buffer, i * IFD_SIZE);
     const tag = view.getUint16(0, littleEndian);
     const type = view.getUint16(2, littleEndian);
     const count = view.getUint32(4, littleEndian);
     const offsetOrValue = view.getUint32(8, littleEndian);
 
-    switch (tag) {
-      case Tag.EXIF_IFD_POINTER:
-      case Tag.JPEG_INTERCHANGE_FORMAT:
-      case Tag.JPEG_INTERCHANGE_FORMAT_LENGTH:
-      case Tag.GPS_INFO_IFD_POINTER:
-      case Tag.INTEROPERABILITY_IFD_POINTER:
-        continue;
-    }
-
     const res: ExifEntry = {
       tag,
       type,
       count,
-      offset: offsetOrValue + offsetStart,
+      offset: offsetOrValue + headerOffset,
       size: valueSize(count, type),
       value: offsetOrValue,
     };
 
+    switch (tag) {
+      case Tag.EXIF_IFD_POINTER:
+        const subResult = await readIfd(
+          file,
+          res.offset,
+          headerOffset,
+          littleEndian,
+        );
+        result = result.concat(subResult);
+        continue;
+      case Tag.JPEG_INTERCHANGE_FORMAT:
+      case Tag.JPEG_INTERCHANGE_FORMAT_LENGTH:
+      case Tag.GPS_INFO_IFD_POINTER:
+      case Tag.INTEROPERABILITY_IFD_POINTER:
+        console.log("Some other bullshit", tag);
+        continue;
+    }
+
     switch (res.type) {
       case IFDType.ASCII:
-        await file.seek(res.offset, Deno.SeekMode.Start);
-        res.value = await readAscii(res.count);
+        res.value = await readAscii(file, res.offset, res.count);
         break;
       case IFDType.BYTE:
       case IFDType.SHORT:
@@ -240,10 +222,37 @@ export async function entries(
         break;
     }
 
-    console.log(res);
+    console.log(tagOffset, res);
 
     result.push(res);
   }
+  return result;
+}
+
+export async function entries(
+  path: string,
+): Promise<ExifEntry[]> {
+  const file = await Deno.open(path);
+
+  // JPEG?
+  if (0xFFD8 !== await readUint16(file)) {
+    console.error("Not a JPEG");
+    return [];
+  }
+
+  // Seek to APP1
+  while (0xFFe1 !== await readUint16(file)) {}
+  const headerOffset = await file.seek(8, Deno.SeekMode.Current);
+  let byteOrder = await readUint16(file);
+  let littleEndian = byteOrder === 0x4949;
+  const curr = await file.seek(6, Deno.SeekMode.Current);
+
+  const result = await readIfd(
+    file,
+    curr,
+    headerOffset,
+    littleEndian,
+  );
 
   Deno.close(file.rid);
   return result;
