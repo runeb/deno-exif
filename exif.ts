@@ -132,13 +132,30 @@ async function readUint16(
 async function readApp1(
   file: Deno.File,
   fileOffset: number,
-  headerOffset: number,
-  littleEndian: boolean,
 ) {
+  const size = await readUint16(file);
   await file.seek(fileOffset, Deno.SeekMode.Start);
-  const size = await readUint16(file, 0, littleEndian);
-  // Skip EXIF header
-  await file.seek(6, Deno.SeekMode.Current);
+
+  // This is the offset into out view that is the TIFF header. All offsets that
+  // appear as values are meant to be calculated with this as a start.
+  const offset = 8;
+
+  const app1 = new Uint8Array(size);
+  await Deno.read(file.rid, app1);
+  const view = new DataView(app1.buffer, 0);
+
+  const byteOrder = view.getUint16(8);
+  const littleEndian = byteOrder === 0x4949;
+
+  const ifd0 = new DataView(view.buffer, 16);
+  const count0 = ifd0.getUint16(0, littleEndian);
+  console.log("APP1 IFD0 counts", count0);
+
+  const next = ifd0.getUint32(2 + (12 * count0), littleEndian);
+
+  const ifd1 = new DataView(view.buffer, next + offset);
+  const count1 = ifd1.getUint16(0, littleEndian);
+  console.log("APP1 IFD1 counts", count1);
 }
 
 async function readIfd(
@@ -241,19 +258,9 @@ export async function entries(
   }
 
   // Seek to APP1
-  while (0xFFe1 !== await readUint16(file)) {}
-  const headerOffset = await file.seek(8, Deno.SeekMode.Current);
-  let byteOrder = await readUint16(file);
-  let littleEndian = byteOrder === 0x4949;
-  const curr = await file.seek(6, Deno.SeekMode.Current);
-
-  const result = await readIfd(
-    file,
-    curr,
-    headerOffset,
-    littleEndian,
-  );
-
+  while (0xFFe1 !== await readUint16(file)) {} // Fix this
+  const fileOffset = await file.seek(0, Deno.SeekMode.Current);
+  await readApp1(file, fileOffset);
   Deno.close(file.rid);
-  return result;
+  return [];
 }
