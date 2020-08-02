@@ -37,8 +37,14 @@ File.open(outpath, "w") do |file|
       file.puts "    assertEquals(entry.count, #{count})"
       file.puts "    assertEquals(entry.size, #{size})"
       case type.to_i
-      when 2,7
+      when 2,7 # String types
         file.puts "    assertEquals(entry.value, \"#{value}\")"
+      when 5,10
+        if value.include? ','
+          file.puts "    assertEquals(entry.value, #{value})"
+        else
+          file.puts "    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat(\"#{value}\").toPrecision(3))"
+        end
       else
         file.puts "    assertEquals(entry.value, #{value})"
       end

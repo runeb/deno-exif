@@ -47,7 +47,6 @@ export type ExifEntry = {
   tag: number;
   type: IFDType;
   count: number;
-  offset: number;
   size: number;
   value: string | number;
 };
@@ -102,12 +101,15 @@ function text(tag: number, value: number): string | number {
   }
 }
 
-async function readAscii(file: Deno.File, fileOffset: number, length: number) {
+async function readAscii(view: DataView, offset: number, length: number) {
   // Subtract 1 because the length is \0 terminator included.
+  return "TODO";
+  /*
   await file.seek(fileOffset, Deno.SeekMode.Start);
   const strBuf = new Uint8Array(length - 1);
   await Deno.read(file.rid, strBuf);
   return new TextDecoder().decode(strBuf);
+  */
 }
 
 async function readUint16(
@@ -129,6 +131,16 @@ async function readUint16(
   return buf;
 }
 
+function innerDataview(
+  view: DataView,
+  offset: number,
+): DataView {
+  return new DataView(
+    view.buffer,
+    offset + view.byteOffset,
+  );
+}
+
 async function readApp1(
   file: Deno.File,
   fileOffset: number,
@@ -147,99 +159,117 @@ async function readApp1(
   const byteOrder = view.getUint16(8);
   const littleEndian = byteOrder === 0x4949;
 
-  const ifd0 = new DataView(view.buffer, 16);
-  const count0 = ifd0.getUint16(0, littleEndian);
-  console.log("APP1 IFD0 counts", count0);
+  const count0 = view.getUint16(16, littleEndian);
+  const ifd0 = innerDataview(view, 16);
+
+  const valueView = new DataView(app1.buffer, 8);
+
+  let tags = await readIfd(ifd0, valueView, littleEndian);
 
   const next = ifd0.getUint32(2 + (12 * count0), littleEndian);
-
-  const ifd1 = new DataView(view.buffer, next + offset);
-  const count1 = ifd1.getUint16(0, littleEndian);
-  console.log("APP1 IFD1 counts", count1);
+  if (next) {
+    const ifd1 = new DataView(view.buffer, next + offset);
+    tags = tags.concat(await readIfd(ifd1, valueView, littleEndian));
+  }
+  return tags;
 }
 
 async function readIfd(
-  file: Deno.File,
-  fileOffset: number,
-  headerOffset: number,
+  view: DataView,
+  valueview: DataView,
   littleEndian: boolean,
 ) {
-  await file.seek(fileOffset, Deno.SeekMode.Start);
-  const count = await readUint16(file, 0, littleEndian);
+  const count = view.getInt16(0, littleEndian);
+  console.debug("Parsing tag count", count);
   let result: ExifEntry[] = [];
-  const ifds = new Uint8Array(IFD_SIZE * count);
-  await Deno.read(file.rid, ifds);
-  console.log("Current loc", await file.seek(0, Deno.SeekMode.Current));
   for (let i = 0; i < count; i++) {
-    const tagOffset = fileOffset + (IFD_SIZE * i);
-    const view = new DataView(ifds.buffer, i * IFD_SIZE);
-    const tag = view.getUint16(0, littleEndian);
-    const type = view.getUint16(2, littleEndian);
-    const count = view.getUint32(4, littleEndian);
-    const offsetOrValue = view.getUint32(8, littleEndian);
-
-    const res: ExifEntry = {
-      tag,
-      type,
-      count,
-      offset: offsetOrValue + headerOffset,
-      size: valueSize(count, type),
-      value: offsetOrValue,
-    };
+    const tagView = innerDataview(view, 2 + (i * IFD_SIZE));
+    const tag = tagView.getUint16(0, littleEndian);
+    const type = tagView.getUint16(2, littleEndian);
+    const count = tagView.getUint32(4, littleEndian);
+    console.debug("tag", tag, type, count);
+    const size = valueSize(count, type);
+    let value: string | number = -1;
+    let offset;
+    if (size > 4) {
+      offset = tagView.getUint32(8, littleEndian);
+    }
 
     switch (tag) {
       case Tag.EXIF_IFD_POINTER:
-        const subResult = await readIfd(
-          file,
-          res.offset,
-          headerOffset,
-          littleEndian,
-        );
-        result = result.concat(subResult);
+        // Thumbnail data
+        const ptr = tagView.getUint32(8, littleEndian);
+        const subView = innerDataview(view, ptr - 8);
+        const subs = await readIfd(subView, valueview, littleEndian);
+        result = result.concat(subs);
         continue;
       case Tag.JPEG_INTERCHANGE_FORMAT:
       case Tag.JPEG_INTERCHANGE_FORMAT_LENGTH:
       case Tag.GPS_INFO_IFD_POINTER:
       case Tag.INTEROPERABILITY_IFD_POINTER:
-        console.log("Some other bullshit", tag);
         continue;
     }
 
-    switch (res.type) {
+    switch (type) {
       case IFDType.ASCII:
-        res.value = await readAscii(file, res.offset, res.count);
+        if (offset) {
+          const b = [];
+          for (let x = 0; x < size - 1; x++) {
+            const strOffset = offset + (x);
+            b.push(valueview.getUint8(strOffset));
+          }
+          value = new TextDecoder().decode(new Uint8Array(b));
+        }
+        break;
+      case IFDType.LONG:
+        value = tagView.getUint32(8, littleEndian);
         break;
       case IFDType.BYTE:
       case IFDType.SHORT:
-        res.value = view.getUint16(8, littleEndian);
+        value = tagView.getUint16(8, littleEndian);
+        break;
+      case IFDType.UNDEFINED:
+        value = `${size} bytes undefined data`;
         break;
       case IFDType.RATIONAL:
-        if (res.tag === Tag.Y_RESOLUTION) {
+        if (tag === Tag.Y_RESOLUTION) {
           const xRes = result.find((r) => r.tag === Tag.X_RESOLUTION);
           if (xRes) {
-            res.value = xRes.value;
+            value = xRes.value;
           } else {
-            res.value = 72;
+            value = 72;
           }
-        } else {
-          const buf = new Uint8Array(64);
-          await file.seek(res.offset, Deno.SeekMode.Start);
-          await Deno.read(file.rid, buf);
-          const v = new DataView(buf.buffer, 8);
-          const numerator = v.getUint32(0, littleEndian);
-          const denominator = v.getUint32(4, littleEndian);
-          if (denominator) {
-            res.value = (numerator / denominator);
-          } else {
-            res.value = `${numerator}/0`;
-          }
+        } else if (offset) {
+          const numerator = valueview.getUint32(offset, littleEndian);
+          const denominator = valueview.getUint32(offset + 4, littleEndian);
+          value = (numerator / denominator);
         }
+        break;
+      case IFDType.SRATIONAL:
+        if (offset) {
+          const numerator = valueview.getInt32(offset, littleEndian);
+          const denominator = valueview.getInt32(offset + 4, littleEndian);
+          value = numerator / denominator;
+        }
+        /*
+  case EXIF_BYTE_ORDER_MOTOROLA:
+                return (((uint32_t)b[0] << 24) | ((uint32_t)b[1] << 16) | ((uint32_t)b[2] << 8) | (uint32_t)b[3]);
+        case EXIF_BYTE_ORDER_INTEL:
+                return (((uint32_t)b[3] << 24) | ((uint32_t)b[2] << 16) | ((uint32_t)b[1] << 8) | (uint32_t)b[0]);
+                */
+
         break;
       default:
         break;
     }
 
-    console.log(tagOffset, res);
+    const res: ExifEntry = {
+      tag,
+      type,
+      count,
+      size,
+      value,
+    };
 
     result.push(res);
   }
@@ -260,7 +290,7 @@ export async function entries(
   // Seek to APP1
   while (0xFFe1 !== await readUint16(file)) {} // Fix this
   const fileOffset = await file.seek(0, Deno.SeekMode.Current);
-  await readApp1(file, fileOffset);
+  const result = await readApp1(file, fileOffset);
   Deno.close(file.rid);
-  return [];
+  return result;
 }
