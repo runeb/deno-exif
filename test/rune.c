@@ -198,7 +198,7 @@ void printExif(const char *path)
   }
 
   unsigned int i, y;
-  for (i = 0; i < 2; i++)
+  for (i = 0; i < 1; i++)
   {
     if (data->ifd[i] && data->ifd[i]->count)
     {

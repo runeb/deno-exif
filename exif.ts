@@ -187,7 +187,6 @@ async function readIfd(
     const tag = tagView.getUint16(0, littleEndian);
     const type = tagView.getUint16(2, littleEndian);
     const count = tagView.getUint32(4, littleEndian);
-    console.debug("tag", tag, type, count);
     const size = valueSize(count, type);
     let value: string | number = -1;
     let offset;
@@ -218,7 +217,16 @@ async function readIfd(
             const strOffset = offset + (x);
             b.push(valueview.getUint8(strOffset));
           }
-          value = new TextDecoder().decode(new Uint8Array(b));
+
+          let strArray;
+          // Fix for 0-termination bug
+          if (b[b.length - 1] === 0) {
+            strArray = new Uint8Array(b.slice(0, b.length - 1));
+          } else {
+            strArray = new Uint8Array(b);
+          }
+          value = new TextDecoder().decode(strArray);
+          console.log("Last byte", b[b.length - 2], size, value);
         }
         break;
       case IFDType.LONG:

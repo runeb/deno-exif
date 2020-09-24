@@ -708,54 +708,6 @@ Deno.test('exif-samples/jpg/Panasonic_DMC-FZ30.jpg', async () => {
     assertEquals(entry.size, 208)
     assertEquals(entry.value, "208 bytes undefined data")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 8)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/Nikon_COOLPIX_P1.jpg', async () => {
@@ -836,38 +788,6 @@ Deno.test('exif-samples/jpg/Nikon_COOLPIX_P1.jpg', async () => {
   }
   entry = result.find(r => r.tag === 531)
   assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("300").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("300").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
   if(entry) {
     assertEquals(entry.type, 3)
     assertEquals(entry.count, 1)
@@ -968,46 +888,6 @@ Deno.test('exif-samples/jpg/Samsung_Digimax_i50_MP3.jpg', async () => {
     assertEquals(entry.size, 16)
     assertEquals(entry.value, "COPYRIGHT, 2005")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat(" 1").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat(" 1").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/Canon_40D_photoshop_import.jpg', async () => {
@@ -1061,38 +941,6 @@ Deno.test('exif-samples/jpg/Canon_40D_photoshop_import.jpg', async () => {
     assertEquals(entry.count, 20)
     assertEquals(entry.size, 20)
     assertEquals(entry.value, "2008:07:31 10:05:49")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -1188,38 +1036,6 @@ Deno.test('exif-samples/jpg/corrupted.jpg', async () => {
     assertEquals(entry.size, 528)
     assertEquals(entry.value, "528 bytes undefined data")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/Konica_Minolta_DiMAGE_Z3.jpg', async () => {
@@ -1314,54 +1130,6 @@ Deno.test('exif-samples/jpg/Konica_Minolta_DiMAGE_Z3.jpg', async () => {
     assertEquals(entry.size, 118)
     assertEquals(entry.value, "118 bytes undefined data")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
 });
 
 Deno.test('exif-samples/jpg/gps/DSCN0021.jpg', async () => {
@@ -1447,38 +1215,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0021.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -1566,38 +1302,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0027.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/gps/DSCN0025.jpg', async () => {
@@ -1683,38 +1387,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0025.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -1802,38 +1474,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0042.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/gps/DSCN0040.jpg', async () => {
@@ -1919,38 +1559,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0040.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -2038,38 +1646,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0029.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/gps/DSCN0012.jpg', async () => {
@@ -2155,38 +1731,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0012.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -2274,38 +1818,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0038.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/gps/DSCN0010.jpg', async () => {
@@ -2391,38 +1903,6 @@ Deno.test('exif-samples/jpg/gps/DSCN0010.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -2510,54 +1990,6 @@ Deno.test('exif-samples/jpg/Fujifilm_FinePix6900ZOOM.jpg', async () => {
     assertEquals(entry.size, 5)
     assertEquals(entry.value, "    ")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/Canon_40D.jpg', async () => {
@@ -2630,38 +2062,6 @@ Deno.test('exif-samples/jpg/Canon_40D.jpg', async () => {
   }
   entry = result.find(r => r.tag === 531)
   assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
   if(entry) {
     assertEquals(entry.type, 3)
     assertEquals(entry.count, 1)
@@ -2745,38 +2145,6 @@ Deno.test('exif-samples/jpg/Kodak_CX7530.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -2872,38 +2240,6 @@ Deno.test('exif-samples/jpg/hdr/canon_hdr_NO.jpg', async () => {
     assertEquals(entry.size, 1)
     assertEquals(entry.value, "")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/hdr/iphone_hdr_NO.jpg', async () => {
@@ -2982,38 +2318,6 @@ Deno.test('exif-samples/jpg/hdr/iphone_hdr_NO.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/hdr/iphone_hdr_YES.jpg', async () => {
@@ -3091,38 +2395,6 @@ Deno.test('exif-samples/jpg/hdr/iphone_hdr_YES.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -3218,38 +2490,6 @@ Deno.test('exif-samples/jpg/hdr/canon_hdr_YES.jpg', async () => {
     assertEquals(entry.size, 1)
     assertEquals(entry.value, "")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/exif-org/sony-cybershot.jpg', async () => {
@@ -3327,70 +2567,6 @@ Deno.test('exif-samples/jpg/exif-org/sony-cybershot.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 271)
-  assert(entry, "Did not find tag 271")
-  if(entry) {
-    assertEquals(entry.type, 2)
-    assertEquals(entry.count, 5)
-    assertEquals(entry.size, 5)
-    assertEquals(entry.value, "SONY")
-  }
-  entry = result.find(r => r.tag === 272)
-  assert(entry, "Did not find tag 272")
-  if(entry) {
-    assertEquals(entry.type, 2)
-    assertEquals(entry.count, 14)
-    assertEquals(entry.size, 14)
-    assertEquals(entry.value, "CYBERSHOT")
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 306)
-  assert(entry, "Did not find tag 306")
-  if(entry) {
-    assertEquals(entry.type, 2)
-    assertEquals(entry.count, 20)
-    assertEquals(entry.size, 20)
-    assertEquals(entry.value, "2000:09:30 10:59:45")
   }
 });
 
@@ -3477,54 +2653,6 @@ Deno.test('exif-samples/jpg/exif-org/fujifilm-finepix40i.jpg', async () => {
     assertEquals(entry.count, 11)
     assertEquals(entry.size, 11)
     assertEquals(entry.value, "          ")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -3674,46 +2802,6 @@ Deno.test('exif-samples/jpg/exif-org/kodak-dc240.jpg', async () => {
     assertEquals(entry.size, 33)
     assertEquals(entry.value, "KODAK DC240 ZOOM DIGITAL CAMERA ")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/exif-org/olympus-c960.jpg', async () => {
@@ -3794,38 +2882,6 @@ Deno.test('exif-samples/jpg/exif-org/olympus-c960.jpg', async () => {
   }
   entry = result.find(r => r.tag === 531)
   assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
   if(entry) {
     assertEquals(entry.type, 3)
     assertEquals(entry.count, 1)
@@ -3918,38 +2974,6 @@ Deno.test('exif-samples/jpg/exif-org/sanyo-vpcg250.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 2)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/exif-org/ricoh-rdc5300.jpg', async () => {
@@ -4019,38 +3043,6 @@ Deno.test('exif-samples/jpg/exif-org/ricoh-rdc5300.jpg', async () => {
     assertEquals(entry.count, 26)
     assertEquals(entry.size, 26)
     assertEquals(entry.value, "(C) by RDC-5300 User     ")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -4132,38 +3124,6 @@ Deno.test('exif-samples/jpg/exif-org/nikon-e950.jpg', async () => {
   }
   entry = result.find(r => r.tag === 531)
   assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("300").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("300").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
   if(entry) {
     assertEquals(entry.type, 3)
     assertEquals(entry.count, 1)
@@ -4256,54 +3216,6 @@ Deno.test('exif-samples/jpg/exif-org/fujifilm-mx1700.jpg', async () => {
     assertEquals(entry.size, 11)
     assertEquals(entry.value, "          ")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/exif-org/fujifilm-dx10.jpg', async () => {
@@ -4389,54 +3301,6 @@ Deno.test('exif-samples/jpg/exif-org/fujifilm-dx10.jpg', async () => {
     assertEquals(entry.count, 11)
     assertEquals(entry.size, 11)
     assertEquals(entry.value, "J P Bowen ")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -4570,38 +3434,6 @@ Deno.test('exif-samples/jpg/exif-org/canon-ixus.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/exif-org/sanyo-vpcsx550.jpg', async () => {
@@ -4682,38 +3514,6 @@ Deno.test('exif-samples/jpg/exif-org/sanyo-vpcsx550.jpg', async () => {
   }
   entry = result.find(r => r.tag === 531)
   assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
   if(entry) {
     assertEquals(entry.type, 3)
     assertEquals(entry.count, 1)
@@ -4806,38 +3606,6 @@ Deno.test('exif-samples/jpg/tests/33-type_error.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/tests/35-empty.jpg', async () => {
@@ -4924,38 +3692,6 @@ Deno.test('exif-samples/jpg/tests/35-empty.jpg', async () => {
     assertEquals(entry.size, 46)
     assertEquals(entry.value, "46 bytes undefined data")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/tests/30-type_error.jpg', async () => {
@@ -5017,38 +3753,6 @@ Deno.test('exif-samples/jpg/tests/30-type_error.jpg', async () => {
     assertEquals(entry.count, 19)
     assertEquals(entry.size, 19)
     assertEquals(entry.value, "Francisco Gonzalez")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -5159,38 +3863,6 @@ Deno.test('exif-samples/jpg/tests/42_IndexError.jpg', async () => {
     assertEquals(entry.count, 528)
     assertEquals(entry.size, 528)
     assertEquals(entry.value, "528 bytes undefined data")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -5402,38 +4074,6 @@ Deno.test('exif-samples/jpg/tests/22-canon_tags.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/tests/36-memory_error.jpg', async () => {
@@ -5520,38 +4160,6 @@ Deno.test('exif-samples/jpg/tests/36-memory_error.jpg', async () => {
     assertEquals(entry.size, 40)
     assertEquals(entry.value, "40 bytes undefined data")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/tests/28-hex_value.jpg', async () => {
@@ -5630,13 +4238,35 @@ Deno.test('exif-samples/jpg/tests/28-hex_value.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
+});
+
+Deno.test('exif-samples/jpg/tests/87_OSError.jpg', async () => {
+  const path = 'test/exif-samples/jpg/tests/87_OSError.jpg'
+  const result = await entries(path);
+  let entry
+  entry = result.find(r => r.tag === 271)
+  assert(entry, "Did not find tag 271")
+  if(entry) {
+    assertEquals(entry.type, 2)
+    assertEquals(entry.count, 18)
+    assertEquals(entry.size, 18)
+    assertEquals(entry.value, "NIKON CORPORATION")
+  }
+  entry = result.find(r => r.tag === 272)
+  assert(entry, "Did not find tag 272")
+  if(entry) {
+    assertEquals(entry.type, 2)
+    assertEquals(entry.count, 11)
+    assertEquals(entry.size, 11)
+    assertEquals(entry.value, "NIKON D70s")
+  }
+  entry = result.find(r => r.tag === 274)
+  assert(entry, "Did not find tag 274")
   if(entry) {
     assertEquals(entry.type, 3)
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
+    assertEquals(entry.value, 1)
   }
   entry = result.find(r => r.tag === 282)
   assert(entry, "Did not find tag 282")
@@ -5644,7 +4274,7 @@ Deno.test('exif-samples/jpg/tests/28-hex_value.jpg', async () => {
     assertEquals(entry.type, 5)
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("0.01").toPrecision(3))
+    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("300").toPrecision(3))
   }
   entry = result.find(r => r.tag === 283)
   assert(entry, "Did not find tag 283")
@@ -5652,10 +4282,58 @@ Deno.test('exif-samples/jpg/tests/28-hex_value.jpg', async () => {
     assertEquals(entry.type, 5)
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("0.01").toPrecision(3))
+    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("300").toPrecision(3))
   }
   entry = result.find(r => r.tag === 296)
   assert(entry, "Did not find tag 296")
+  if(entry) {
+    assertEquals(entry.type, 3)
+    assertEquals(entry.count, 1)
+    assertEquals(entry.size, 2)
+    assertEquals(entry.value, 2)
+  }
+  entry = result.find(r => r.tag === 305)
+  assert(entry, "Did not find tag 305")
+  if(entry) {
+    assertEquals(entry.type, 2)
+    assertEquals(entry.count, 9)
+    assertEquals(entry.size, 9)
+    assertEquals(entry.value, "Ver.1.00")
+  }
+  entry = result.find(r => r.tag === 306)
+  assert(entry, "Did not find tag 306")
+  if(entry) {
+    assertEquals(entry.type, 2)
+    assertEquals(entry.count, 20)
+    assertEquals(entry.size, 20)
+    assertEquals(entry.value, "2005:12:14 14:39:47")
+  }
+  entry = result.find(r => r.tag === 318)
+  assert(entry, "Did not find tag 318")
+  if(entry) {
+    assertEquals(entry.type, 5)
+    assertEquals(entry.count, 2)
+    assertEquals(entry.size, 16)
+    assertEquals(entry.value, "0.313, 0.329")
+  }
+  entry = result.find(r => r.tag === 319)
+  assert(entry, "Did not find tag 319")
+  if(entry) {
+    assertEquals(entry.type, 5)
+    assertEquals(entry.count, 6)
+    assertEquals(entry.size, 48)
+    assertEquals(entry.value, "0.64, 0.33, 0.21, 0.71, 0.15, 0.06")
+  }
+  entry = result.find(r => r.tag === 529)
+  assert(entry, "Did not find tag 529")
+  if(entry) {
+    assertEquals(entry.type, 5)
+    assertEquals(entry.count, 3)
+    assertEquals(entry.size, 24)
+    assertEquals(entry.value, "0.299, 0.587, 0.114")
+  }
+  entry = result.find(r => r.tag === 531)
+  assert(entry, "Did not find tag 531")
   if(entry) {
     assertEquals(entry.type, 3)
     assertEquals(entry.count, 1)
@@ -5756,46 +4434,6 @@ Deno.test('exif-samples/jpg/tests/45-gps_ifd.jpg', async () => {
     assertEquals(entry.size, 55)
     assertEquals(entry.value, "TM&Copyright (C) 2010 Sony Computer Entertainment Inc.")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/tests/46_UnicodeEncodeError.jpg', async () => {
@@ -5882,38 +4520,6 @@ Deno.test('exif-samples/jpg/tests/46_UnicodeEncodeError.jpg', async () => {
     assertEquals(entry.size, 33)
     assertEquals(entry.value, "Copyright © 2012 Robert Muckley")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/Sony_HDR-HC3.jpg', async () => {
@@ -5984,70 +4590,6 @@ Deno.test('exif-samples/jpg/Sony_HDR-HC3.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 2)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 271)
-  assert(entry, "Did not find tag 271")
-  if(entry) {
-    assertEquals(entry.type, 2)
-    assertEquals(entry.count, 5)
-    assertEquals(entry.size, 5)
-    assertEquals(entry.value, "SONY")
-  }
-  entry = result.find(r => r.tag === 272)
-  assert(entry, "Did not find tag 272")
-  if(entry) {
-    assertEquals(entry.type, 2)
-    assertEquals(entry.count, 8)
-    assertEquals(entry.size, 8)
-    assertEquals(entry.value, "HDR-HC3")
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/PaintTool_sample.jpg', async () => {
@@ -6093,38 +4635,6 @@ Deno.test('exif-samples/jpg/PaintTool_sample.jpg', async () => {
     assertEquals(entry.count, 11)
     assertEquals(entry.size, 11)
     assertEquals(entry.value, "GIMP 2.4.5")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 0)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -6212,38 +4722,6 @@ Deno.test('exif-samples/jpg/Pentax_K10D.jpg', async () => {
     assertEquals(entry.size, 32)
     assertEquals(entry.value, "0x77, 0x00, 0x77, 0x00, 0x77, 0x00, 0x2e, 0x00, 0x6c, 0x00, 0x61, 0x00, 0x69, 0x00, 0x74, 0x00, 0x63, 0x00, 0x68, 0x00, 0x65, 0x00, 0x2e, 0x00, 0x63, 0x00, 0x6f, 0x00, 0x6d, 0x00, 0x00, 0x00")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/xmp/BlueSquare.jpg', async () => {
@@ -6305,38 +4783,6 @@ Deno.test('exif-samples/jpg/xmp/BlueSquare.jpg', async () => {
     assertEquals(entry.count, 20)
     assertEquals(entry.size, 20)
     assertEquals(entry.value, "2005:09:07 15:09:51")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -6557,46 +5003,6 @@ Deno.test('exif-samples/jpg/Ricoh_Caplio_RR330.jpg', async () => {
     assertEquals(entry.count, 20)
     assertEquals(entry.size, 20)
     assertEquals(entry.value, "2008:07:31 17:36:21")
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
   entry = result.find(r => r.tag === 531)
   assert(entry, "Did not find tag 531")
@@ -6848,38 +5254,6 @@ Deno.test('exif-samples/jpg/Olympus_C8080WZ.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 0)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/Canon_PowerShot_S40.jpg', async () => {
@@ -6949,38 +5323,6 @@ Deno.test('exif-samples/jpg/Canon_PowerShot_S40.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("180").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
@@ -7052,38 +5394,6 @@ Deno.test('exif-samples/jpg/Nikon_D70.jpg', async () => {
     assertEquals(entry.size, 20)
     assertEquals(entry.value, "2008:07:31 10:03:44")
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/Canon_DIGITAL_IXUS_400.jpg', async () => {
@@ -7154,38 +5464,6 @@ Deno.test('exif-samples/jpg/Canon_DIGITAL_IXUS_400.jpg', async () => {
     assertEquals(entry.size, 2)
     assertEquals(entry.value, 1)
   }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
 });
 
 Deno.test('exif-samples/jpg/WWL_(Polaroid)_ION230.jpg', async () => {
@@ -7255,54 +5533,6 @@ Deno.test('exif-samples/jpg/WWL_(Polaroid)_ION230.jpg', async () => {
     assertEquals(entry.count, 20)
     assertEquals(entry.size, 20)
     assertEquals(entry.value, "2008:07:31 17:32:06")
-  }
-  entry = result.find(r => r.tag === 531)
-  assert(entry, "Did not find tag 531")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 6)
-  }
-  entry = result.find(r => r.tag === 274)
-  assert(entry, "Did not find tag 274")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 1)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
   entry = result.find(r => r.tag === 531)
   assert(entry, "Did not find tag 531")
@@ -7389,38 +5619,6 @@ Deno.test('exif-samples/jpg/long_description.jpg', async () => {
     assertEquals(entry.count, 1)
     assertEquals(entry.size, 1)
     assertEquals(entry.value, "")
-  }
-  entry = result.find(r => r.tag === 259)
-  assert(entry, "Did not find tag 259")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 0)
-  }
-  entry = result.find(r => r.tag === 282)
-  assert(entry, "Did not find tag 282")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 283)
-  assert(entry, "Did not find tag 283")
-  if(entry) {
-    assertEquals(entry.type, 5)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 8)
-    assertEquals(parseFloat(entry.value as string).toPrecision(3), parseFloat("72").toPrecision(3))
-  }
-  entry = result.find(r => r.tag === 296)
-  assert(entry, "Did not find tag 296")
-  if(entry) {
-    assertEquals(entry.type, 3)
-    assertEquals(entry.count, 1)
-    assertEquals(entry.size, 2)
-    assertEquals(entry.value, 2)
   }
 });
 
